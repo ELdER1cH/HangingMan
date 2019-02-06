@@ -19,13 +19,13 @@ namespace HangingMan
         }
         static void Start()
         {
-            string playstyle;
+            int playercount;
             //--------------------------------------------------------------------------------------------------------
-            Console.WriteLine("You are playing Hanging Man");
-            Console.Write("Do you play alone or with a friend:");
-            playstyle = Console.ReadLine();
+            Console.WriteLine("You are playing Hanging Man v1");
+            Console.Write("How many Players want to joun the game?");
+            playercount = Console.ReadLine();
             //--------------------------------------------------------------------------------------------------------
-            switch (playstyle)
+            switch (playercount)
             {
                 case ("Alone"):
                     Console.Clear();
