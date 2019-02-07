@@ -64,7 +64,7 @@ namespace HangingMan
         static void Alone()
         {
             Random wordSelect = new Random();
-            string[] wordsFromFile = File.ReadAllLines(@"C:\Users\maximilian.wimmer\Documents\GitHub\HangingMan\HangingMan\wordsLibary.txt");
+            string[] wordsFromFile = File.ReadAllLines(@"wordsLibary.txt");
             int counter = 0;
             bool wordComplete = false;
             char userCharakter = ' ';
