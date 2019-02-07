@@ -22,3 +22,9 @@ C:\Users\maximilian.wimmer\Documents\Programming\HangingMan\HangingMan\obj\Debug
 C:\Users\maximilian.wimmer\Documents\Programming\HangingMan\HangingMan\bin\Debug\HangingMan.exe
 C:\Users\maximilian.wimmer\Documents\Programming\HangingMan\HangingMan\bin\Debug\HangingMan.pdb
 C:\Users\maximilian.wimmer\Documents\Programming\HangingMan\HangingMan\obj\Debug\HangingMan.csprojResolveAssemblyReference.cache
+C:\Users\maximilian.wimmer\Documents\GitHub\HangingMan\HangingMan\bin\Debug\HangingMan.exe.config
+C:\Users\maximilian.wimmer\Documents\GitHub\HangingMan\HangingMan\obj\Debug\HangingMan.exe
+C:\Users\maximilian.wimmer\Documents\GitHub\HangingMan\HangingMan\obj\Debug\HangingMan.pdb
+C:\Users\maximilian.wimmer\Documents\GitHub\HangingMan\HangingMan\bin\Debug\HangingMan.exe
+C:\Users\maximilian.wimmer\Documents\GitHub\HangingMan\HangingMan\bin\Debug\HangingMan.pdb
+C:\Users\maximilian.wimmer\Documents\GitHub\HangingMan\HangingMan\obj\Debug\HangingMan.csprojResolveAssemblyReference.cache
