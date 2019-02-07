@@ -11,6 +11,7 @@ namespace HangingMan
     class Program
     {
         public static string wort;
+        public static string lowerWort;
         static void Main(string[] args)
         {
             Start();
@@ -62,35 +63,149 @@ namespace HangingMan
         }
         static void Alone()
         {
-           
+            Random wordSelect = new Random();
+            string[] wordsFromFile = File.ReadAllLines(@"C:\Users\maximilian.wimmer\Documents\Programming\HangingMan\HangingMan\Test.txt");
+            
+            int counter = 0;
+            bool wordComplete = false;
+            char userCharakter = ' ';
+            bool error = false;
+            //--------------------------------------------------------------------------------------------------------
+            Console.WriteLine("You are playing against the Computer!");
+            Console.WriteLine("-------------------------------------");
+            wort = wordsFromFile[wordSelect.Next(0, wordsFromFile.Length)];
+            var guessedWord = new StringBuilder(new String('_', wort.Length));
+            Thread.Sleep(2000);
+            Console.Clear();
+            //--------------------------------------------------------------------------------------------------------
+            while (counter < 10 && wordComplete == false)
+            {
+
+                Console.WriteLine("It's your Turn! ");
+                Console.WriteLine("-------------------------");
+                Console.WriteLine();
+                HangingManPicture(counter);
+                Console.WriteLine();
+                Console.Write("Your word is:");
+                Console.Write(guessedWord);
+                Console.WriteLine();
+                Console.WriteLine("Please enter a Charakter: ");
+                //--------------------------------------------------------------------------------------------------------
+                try
+                {
+                    userCharakter = Convert.ToChar(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error" + e.Message);
+                    error = true;
+                }
+                lowerWort = wort.ToLower();
+                //--------------------------------------------------------------------------------------------------------
+                if (wort.Contains(userCharakter) || wort.Contains(char.ToUpper(userCharakter))) 
+                {
+                    Console.WriteLine("Well Done");
+                    for (int i = 0; i < wort.Length; i++)
+                    {
+                        if (userCharakter == wort[i])
+                            guessedWord[i] = userCharakter;
+                        if (char.ToUpper(userCharakter) == wort[i])
+                            guessedWord[i] = char.ToUpper(userCharakter);
+
+
+                    }
+
+                    Console.WriteLine("Your guessed Word is: ");
+                    Console.WriteLine(guessedWord);
+
+                    if (guessedWord.ToString() == wort)
+                    {
+                        wordComplete = true;
+                    }
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+                //--------------------------------------------------------------------------------------------------------
+                else
+                {
+                    if (error == true)
+                    {
+                        Console.WriteLine("You made a mistake!");
+                        error = false;
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        Console.WriteLine("What a pity!");
+                        Console.WriteLine("Your Charakter is not in the Word!");
+                        counter = counter + 1;
+                        if (guessedWord.ToString() == wort)
+                        {
+                            wordComplete = true;
+                        }
+                        Thread.Sleep(1000);
+                    }
+                    
+                }
+                Console.Clear();
+            }
+            //--------------------------------------------------------------------------------------------------------
+
+            if (wort == guessedWord.ToString())
+            {
+                Console.WriteLine("Game Over");
+                Console.WriteLine("---------");
+                Console.WriteLine();
+                Console.WriteLine("You beat the Computer!");
+                Console.Write("Do you want to play again(y/n):");
+                string repeat = Console.ReadLine();
+                if (repeat == "y")
+                {
+                    Thread.Sleep(2000);
+                    Console.Clear();
+                    Alone();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Game Over");
+                HangingManPicture(11);
+                Console.WriteLine();
+                Console.WriteLine("The Computer has won!");
+                Console.Write("Do you want to play again(y/n):");
+                string repeat = Console.ReadLine();
+                if (repeat == "y")
+                {
+                    Thread.Sleep(2000);
+                    Console.Clear();
+                    Alone();
+                }
+                //--------------------------------------------------------------------------------------------------------
+                Console.ReadLine();
+
+            }
         }
         static void Together()
         {
-            string winner;
-            int counter = 0;
-            bool wordComplete = false;
-            char userCharakter = 'a';
-            
-            Console.WriteLine("You are playing together!");
-            Console.WriteLine("-------------------------");
-            Console.WriteLine();
-            Console.Write("Player 1 please enter you word: ");
-            wort = Console.ReadLine();
-            char[] buchstaben = new char[wort.Length];
-            char[] guessedWord = new char[wort.Length];
-            //--------------------------------------------------------------------------------------------------------
-            using (StringReader sr = new StringReader(wort))
-            {
-                sr.Read(buchstaben, 0, wort.Length);
-            }
-            Console.WriteLine("The word is saved!");
-            Thread.Sleep(3000);
-            Console.Clear();
-            //--------------------------------------------------------------------------------------------------------
-           
-                while(counter < 10 & wordComplete == false)
+                int counter = 0;
+                bool wordComplete = false;
+                char userCharakter = ' ';
+                bool Error = false;
+                //--------------------------------------------------------------------------------------------------------
+                Console.WriteLine("You are playing together!");
+                Console.WriteLine("-------------------------");
+                Console.WriteLine();
+                Console.WriteLine("Player 1 please enter you word: ");
+                wort = Console.ReadLine();
+                var guessedWord = new StringBuilder(new String('_', wort.Length));
+                Console.WriteLine("The word is saved!");
+                Thread.Sleep(3000);
+                Console.Clear();
+                //--------------------------------------------------------------------------------------------------------
+
+                while (counter < 10 && wordComplete == false)
                 {
-                
+
                     Console.WriteLine("Player 2 it's your Turn! ");
                     Console.WriteLine("-------------------------");
                     Console.WriteLine();
@@ -100,6 +215,7 @@ namespace HangingMan
                     Console.Write(guessedWord);
                     Console.WriteLine();
                     Console.WriteLine("Please enter a Charakter: ");
+                    //--------------------------------------------------------------------------------------------------------
                     try
                     {
                         userCharakter = Convert.ToChar(Console.ReadLine());
@@ -107,215 +223,251 @@ namespace HangingMan
                     catch (Exception e)
                     {
                         Console.WriteLine("Error" + e.Message);
+                        Error = true;
+                        
                     }
-                    //--------------------------------------------------------------------------------------------------------
-                    if (Array.Exists(buchstaben, element => element == userCharakter))
+                //--------------------------------------------------------------------------------------------------------
+
+                if (wort.Contains(userCharakter) || wort.Contains(char.ToUpper(userCharakter)))
+                {
+                    Console.WriteLine("Well Done");
+                    for (int i = 0; i < wort.Length; i++)
                     {
-                        Console.WriteLine("Well Done");
-                        guessedWord[Array.IndexOf(buchstaben, userCharakter)] = userCharakter;
-                        Console.Write("Your guessed Word is: ");
-                        Console.Write(guessedWord);
-                        Console.ReadLine();
-                            if (guessedWord == buchstaben)
-                            {
-                                wordComplete = true;
-                            }
+                        if (userCharakter == wort[i])
+                            guessedWord[i] = userCharakter;
+                        if (char.ToUpper(userCharakter) == wort[i])
+                            guessedWord[i] = userCharakter;
+                    }
+
+                    Console.WriteLine("Your guessed Word is: ");
+                    Console.WriteLine(guessedWord);
+
+                    if (guessedWord.ToString() == wort)
+                    {
+                        wordComplete = true;
+                    }
+                    Console.ReadLine();
+                }
+                //--------------------------------------------------------------------------------------------------------
+                else
+                {
+                    if (Error == true)
+                    {
+                        Console.WriteLine("You made a mistake!");
+                        Thread.Sleep(1000);
+                        Error = false;
                     }
                     else
                     {
                         Console.WriteLine("What a pity!");
                         Console.WriteLine("Your Charakter is not in the Word!");
                         counter = counter + 1;
-                        Console.ReadLine();
-                            if (guessedWord == buchstaben)
-                            {
-                                wordComplete = true;
-                            }
-                }
+                        if (guessedWord.ToString() == wort)
+                        {
+                            wordComplete = true;
+                        }
+                        Thread.Sleep(1000);
+                    }
                     
-                //--------------------------------------------------------------------------------------------------------
-                Console.Clear();
                 }
-            //--------------------------------------------------------------------------------------------------------
-            if (buchstaben == guessedWord)
-            {
-                Console.WriteLine("Game Over");
-                Console.WriteLine("---------");
-                Console.WriteLine();
-                Console.WriteLine("Player 2 has won!");
+                Console.Clear();
             }
-            else
-            {
-                Console.WriteLine("Game Over");
-                HangingManPicture(11);
-                Console.WriteLine();
-                Console.WriteLine("Player 1 has won!");
-                wordComplete = true;
-            }
-            //--------------------------------------------------------------------------------------------------------
-            Console.ReadLine();
-        }
+                //--------------------------------------------------------------------------------------------------------
+
+                if (wort == guessedWord.ToString())
+                {
+                    Console.WriteLine("Game Over");
+                    Console.WriteLine("---------");
+                    Console.WriteLine();
+                    Console.WriteLine("Player 2 has won!");
+                    Console.Write("Do you want to play again(y/n):");
+                    string repeat = Console.ReadLine();
+                    if (repeat == "y")
+                    {
+                        Thread.Sleep(2000);
+                        Console.Clear();
+                        Together();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Game Over");
+                    HangingManPicture(11);
+                    Console.WriteLine();
+                    Console.WriteLine("Player 1 has won!");
+                    Console.Write("Do you want to play again(y/n):");
+                    string repeat = Console.ReadLine();
+                    if (repeat == "y")
+                    {
+                        Thread.Sleep(2000);
+                        Console.Clear();
+                        Together();
+                    }
+                    //--------------------------------------------------------------------------------------------------------
+                    Console.ReadLine();
+                }
+            } 
         static void HangingManPicture (int counter)
         {
-            switch (counter)
-            {
-                case (0):
-                    Console.WriteLine(" _____________________ ");
-                    Console.WriteLine("|                     |");
-                    Console.WriteLine("|                     |");
-                    Console.WriteLine("|                     |");
-                    Console.WriteLine("|                     |");
-                    Console.WriteLine("|                     |");
-                    Console.WriteLine("|                     |");
-                    Console.WriteLine("|                     |");
-                    Console.WriteLine("|                     |");
-                    Console.WriteLine("|                     |");
-                    Console.WriteLine("|_____________________|");
-                    return;
-                case (1):
-                    Console.WriteLine(@" _____________________ ");
-                    Console.WriteLine(@"|                     |");
-                    Console.WriteLine(@"|                     |");
-                    Console.WriteLine(@"|                     |");
-                    Console.WriteLine(@"|                     |");
-                    Console.WriteLine(@"|                     |");
-                    Console.WriteLine(@"|                     |");
-                    Console.WriteLine(@"|                     |");
-                    Console.WriteLine(@"|   _______________   |");
-                    Console.WriteLine(@"|  /               \  |");
-                    Console.WriteLine(@"|_/_________________\_|");
-                    return;
-                case (2):
-                    Console.WriteLine(@" _____________________ ");
-                    Console.WriteLine(@"|                     |");
-                    Console.WriteLine(@"|                     |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|   _____I_________   |");
-                    Console.WriteLine(@"|  /               \  |");
-                    Console.WriteLine(@"|_/_________________\_|");
-                    return;
-                case (3):
-                    Console.WriteLine(@" _____________________ ");
-                    Console.WriteLine(@"|                     |");
-                    Console.WriteLine(@"|        _________    |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|   _____I_________   |");
-                    Console.WriteLine(@"|  /               \  |");
-                    Console.WriteLine(@"|_/_________________\_|");
-                    return;
-                case (4):
-                    Console.WriteLine(@" _____________________ ");
-                    Console.WriteLine(@"|                     |");
-                    Console.WriteLine(@"|        _________    |");
-                    Console.WriteLine(@"|        I  /         |");
-                    Console.WriteLine(@"|        I /          |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|   _____I_________   |");
-                    Console.WriteLine(@"|  /               \  |");
-                    Console.WriteLine(@"|_/_________________\_|");
-                    return;
-                case (5):
-                    Console.WriteLine(@" _____________________ ");
-                    Console.WriteLine(@"|                     |");
-                    Console.WriteLine(@"|        _________    |");
-                    Console.WriteLine(@"|        I  /    I    |");
-                    Console.WriteLine(@"|        I /     I    |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|   _____I_________   |");
-                    Console.WriteLine(@"|  /               \  |");
-                    Console.WriteLine(@"|_/_________________\_|");
-                    return;
-                case (6):
-                    Console.WriteLine(@" _____________________ ");
-                    Console.WriteLine(@"|                     |");
-                    Console.WriteLine(@"|        _________    |");
-                    Console.WriteLine(@"|        I  /    I    |");
-                    Console.WriteLine(@"|        I /     I    |");
-                    Console.WriteLine(@"|        I       0    |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|   _____I_________   |");
-                    Console.WriteLine(@"|  /               \  |");
-                    Console.WriteLine(@"|_/_________________\_|");
-                    return;
-                case (7):
-                    Console.WriteLine(@" _____________________ ");
-                    Console.WriteLine(@"|                     |");
-                    Console.WriteLine(@"|        _________    |");
-                    Console.WriteLine(@"|        I  /    I    |");
-                    Console.WriteLine(@"|        I /     I    |");
-                    Console.WriteLine(@"|        I       0    |");
-                    Console.WriteLine(@"|        I       1    |");
-                    Console.WriteLine(@"|        I            |");
-                    Console.WriteLine(@"|   _____I_________   |");
-                    Console.WriteLine(@"|  /               \  |");
-                    Console.WriteLine(@"|_/_________________\_|");
-                    return;
-                case (8):
-                    Console.WriteLine(@" _____________________ ");
-                    Console.WriteLine(@"|                     |");
-                    Console.WriteLine(@"|        _________    |");
-                    Console.WriteLine(@"|        I  /    I    |");
-                    Console.WriteLine(@"|        I /     I    |");
-                    Console.WriteLine(@"|        I       0    |");
-                    Console.WriteLine(@"|        I       1    |");
-                    Console.WriteLine(@"|        I        \   |");
-                    Console.WriteLine(@"|   _____I_________   |");
-                    Console.WriteLine(@"|  /               \  |");
-                    Console.WriteLine(@"|_/_________________\_|");
-                    return;
-                case (9):
-                    Console.WriteLine(@" _____________________ ");
-                    Console.WriteLine(@"|                     |");
-                    Console.WriteLine(@"|        _________    |");
-                    Console.WriteLine(@"|        I  /    I    |");
-                    Console.WriteLine(@"|        I /     I    |");
-                    Console.WriteLine(@"|        I       0    |");
-                    Console.WriteLine(@"|        I       1    |");
-                    Console.WriteLine(@"|        I      / \   |");
-                    Console.WriteLine(@"|   _____I_________   |");
-                    Console.WriteLine(@"|  /               \  |");
-                    Console.WriteLine(@"|_/_________________\_|");
-                    return;
-                case (10):
-                    Console.WriteLine(@" _____________________ ");
-                    Console.WriteLine(@"|                     |");
-                    Console.WriteLine(@"|        _________    |");
-                    Console.WriteLine(@"|        I  /    I    |");
-                    Console.WriteLine(@"|        I /     I    |");
-                    Console.WriteLine(@"|        I       0/   |");
-                    Console.WriteLine(@"|        I       1    |");
-                    Console.WriteLine(@"|        I      / \   |");
-                    Console.WriteLine(@"|   _____I_________   |");
-                    Console.WriteLine(@"|  /               \  |");
-                    Console.WriteLine(@"|_/_________________\_|");
-                    return;
-                case (11):
-                    Console.WriteLine(@" _____________________ ");
-                    Console.WriteLine(@"|                     |");
-                    Console.WriteLine(@"|        _________    |");
-                    Console.WriteLine(@"|        I  /    I    |");
-                    Console.WriteLine(@"|        I /     I    |");
-                    Console.WriteLine(@"|        I      \0/   |");
-                    Console.WriteLine(@"|        I       1    |");
-                    Console.WriteLine(@"|        I      / \   |");
-                    Console.WriteLine(@"|   _____I_________   |");
-                    Console.WriteLine(@"|  /               \  |");
-                    Console.WriteLine(@"|_/_________________\_|");
-                    return;
+                switch (counter)
+                {
+                    case (0):
+                        Console.WriteLine(" _____________________ ");
+                        Console.WriteLine("|                     |");
+                        Console.WriteLine("|                     |");
+                        Console.WriteLine("|                     |");
+                        Console.WriteLine("|                     |");
+                        Console.WriteLine("|                     |");
+                        Console.WriteLine("|                     |");
+                        Console.WriteLine("|                     |");
+                        Console.WriteLine("|                     |");
+                        Console.WriteLine("|                     |");
+                        Console.WriteLine("|_____________________|");
+                        return;
+                    case (1):
+                        Console.WriteLine(@" _____________________ ");
+                        Console.WriteLine(@"|                     |");
+                        Console.WriteLine(@"|                     |");
+                        Console.WriteLine(@"|                     |");
+                        Console.WriteLine(@"|                     |");
+                        Console.WriteLine(@"|                     |");
+                        Console.WriteLine(@"|                     |");
+                        Console.WriteLine(@"|                     |");
+                        Console.WriteLine(@"|   _______________   |");
+                        Console.WriteLine(@"|  /               \  |");
+                        Console.WriteLine(@"|_/_________________\_|");
+                        return;
+                    case (2):
+                        Console.WriteLine(@" _____________________ ");
+                        Console.WriteLine(@"|                     |");
+                        Console.WriteLine(@"|                     |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|   _____I_________   |");
+                        Console.WriteLine(@"|  /               \  |");
+                        Console.WriteLine(@"|_/_________________\_|");
+                        return;
+                    case (3):
+                        Console.WriteLine(@" _____________________ ");
+                        Console.WriteLine(@"|                     |");
+                        Console.WriteLine(@"|        _________    |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|   _____I_________   |");
+                        Console.WriteLine(@"|  /               \  |");
+                        Console.WriteLine(@"|_/_________________\_|");
+                        return;
+                    case (4):
+                        Console.WriteLine(@" _____________________ ");
+                        Console.WriteLine(@"|                     |");
+                        Console.WriteLine(@"|        _________    |");
+                        Console.WriteLine(@"|        I  /         |");
+                        Console.WriteLine(@"|        I /          |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|   _____I_________   |");
+                        Console.WriteLine(@"|  /               \  |");
+                        Console.WriteLine(@"|_/_________________\_|");
+                        return;
+                    case (5):
+                        Console.WriteLine(@" _____________________ ");
+                        Console.WriteLine(@"|                     |");
+                        Console.WriteLine(@"|        _________    |");
+                        Console.WriteLine(@"|        I  /    I    |");
+                        Console.WriteLine(@"|        I /     I    |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|   _____I_________   |");
+                        Console.WriteLine(@"|  /               \  |");
+                        Console.WriteLine(@"|_/_________________\_|");
+                        return;
+                    case (6):
+                        Console.WriteLine(@" _____________________ ");
+                        Console.WriteLine(@"|                     |");
+                        Console.WriteLine(@"|        _________    |");
+                        Console.WriteLine(@"|        I  /    I    |");
+                        Console.WriteLine(@"|        I /     I    |");
+                        Console.WriteLine(@"|        I       0    |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|   _____I_________   |");
+                        Console.WriteLine(@"|  /               \  |");
+                        Console.WriteLine(@"|_/_________________\_|");
+                        return;
+                    case (7):
+                        Console.WriteLine(@" _____________________ ");
+                        Console.WriteLine(@"|                     |");
+                        Console.WriteLine(@"|        _________    |");
+                        Console.WriteLine(@"|        I  /    I    |");
+                        Console.WriteLine(@"|        I /     I    |");
+                        Console.WriteLine(@"|        I       0    |");
+                        Console.WriteLine(@"|        I       1    |");
+                        Console.WriteLine(@"|        I            |");
+                        Console.WriteLine(@"|   _____I_________   |");
+                        Console.WriteLine(@"|  /               \  |");
+                        Console.WriteLine(@"|_/_________________\_|");
+                        return;
+                    case (8):
+                        Console.WriteLine(@" _____________________ ");
+                        Console.WriteLine(@"|                     |");
+                        Console.WriteLine(@"|        _________    |");
+                        Console.WriteLine(@"|        I  /    I    |");
+                        Console.WriteLine(@"|        I /     I    |");
+                        Console.WriteLine(@"|        I       0    |");
+                        Console.WriteLine(@"|        I       1    |");
+                        Console.WriteLine(@"|        I        \   |");
+                        Console.WriteLine(@"|   _____I_________   |");
+                        Console.WriteLine(@"|  /               \  |");
+                        Console.WriteLine(@"|_/_________________\_|");
+                        return;
+                    case (9):
+                        Console.WriteLine(@" _____________________ ");
+                        Console.WriteLine(@"|                     |");
+                        Console.WriteLine(@"|        _________    |");
+                        Console.WriteLine(@"|        I  /    I    |");
+                        Console.WriteLine(@"|        I /     I    |");
+                        Console.WriteLine(@"|        I       0    |");
+                        Console.WriteLine(@"|        I       1    |");
+                        Console.WriteLine(@"|        I      / \   |");
+                        Console.WriteLine(@"|   _____I_________   |");
+                        Console.WriteLine(@"|  /               \  |");
+                        Console.WriteLine(@"|_/_________________\_|");
+                        return;
+                    case (10):
+                        Console.WriteLine(@" _____________________ ");
+                        Console.WriteLine(@"|                     |");
+                        Console.WriteLine(@"|        _________    |");
+                        Console.WriteLine(@"|        I  /    I    |");
+                        Console.WriteLine(@"|        I /     I    |");
+                        Console.WriteLine(@"|        I       0/   |");
+                        Console.WriteLine(@"|        I       1    |");
+                        Console.WriteLine(@"|        I      / \   |");
+                        Console.WriteLine(@"|   _____I_________   |");
+                        Console.WriteLine(@"|  /               \  |");
+                        Console.WriteLine(@"|_/_________________\_|");
+                        return;
+                    case (11):
+                        Console.WriteLine(@" _____________________ ");
+                        Console.WriteLine(@"|                     |");
+                        Console.WriteLine(@"|        _________    |");
+                        Console.WriteLine(@"|        I  /    I    |");
+                        Console.WriteLine(@"|        I /     I    |");
+                        Console.WriteLine(@"|        I      \0/   |");
+                        Console.WriteLine(@"|        I       1    |");
+                        Console.WriteLine(@"|        I      / \   |");
+                        Console.WriteLine(@"|   _____I_________   |");
+                        Console.WriteLine(@"|  /               \  |");
+                        Console.WriteLine(@"|_/_________________\_|");
+                        return;
+                }
             }
         }
     }
-}

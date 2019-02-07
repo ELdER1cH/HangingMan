@@ -10,3 +10,15 @@ C:\Users\Agando\OneDrive\HangingMan\HangingMan\bin\Debug\HangingMan.pdb
 C:\Users\Agando\OneDrive\HangingMan\HangingMan\obj\Debug\HangingMan.csprojResolveAssemblyReference.cache
 C:\Users\Agando\OneDrive\HangingMan\HangingMan\obj\Debug\HangingMan.exe
 C:\Users\Agando\OneDrive\HangingMan\HangingMan\obj\Debug\HangingMan.pdb
+D:\Programmng\HangingMan\HangingMan\bin\Debug\HangingMan.exe.config
+D:\Programmng\HangingMan\HangingMan\obj\Debug\HangingMan.exe
+D:\Programmng\HangingMan\HangingMan\obj\Debug\HangingMan.pdb
+D:\Programmng\HangingMan\HangingMan\bin\Debug\HangingMan.exe
+D:\Programmng\HangingMan\HangingMan\bin\Debug\HangingMan.pdb
+D:\Programmng\HangingMan\HangingMan\obj\Debug\HangingMan.csprojResolveAssemblyReference.cache
+C:\Users\maximilian.wimmer\Documents\Programming\HangingMan\HangingMan\bin\Debug\HangingMan.exe.config
+C:\Users\maximilian.wimmer\Documents\Programming\HangingMan\HangingMan\obj\Debug\HangingMan.exe
+C:\Users\maximilian.wimmer\Documents\Programming\HangingMan\HangingMan\obj\Debug\HangingMan.pdb
+C:\Users\maximilian.wimmer\Documents\Programming\HangingMan\HangingMan\bin\Debug\HangingMan.exe
+C:\Users\maximilian.wimmer\Documents\Programming\HangingMan\HangingMan\bin\Debug\HangingMan.pdb
+C:\Users\maximilian.wimmer\Documents\Programming\HangingMan\HangingMan\obj\Debug\HangingMan.csprojResolveAssemblyReference.cache
