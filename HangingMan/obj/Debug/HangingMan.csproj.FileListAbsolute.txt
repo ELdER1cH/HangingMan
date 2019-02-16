@@ -28,3 +28,10 @@ C:\Users\maximilian.wimmer\Documents\GitHub\HangingMan\HangingMan\obj\Debug\Hang
 C:\Users\maximilian.wimmer\Documents\GitHub\HangingMan\HangingMan\bin\Debug\HangingMan.exe
 C:\Users\maximilian.wimmer\Documents\GitHub\HangingMan\HangingMan\bin\Debug\HangingMan.pdb
 C:\Users\maximilian.wimmer\Documents\GitHub\HangingMan\HangingMan\obj\Debug\HangingMan.csprojResolveAssemblyReference.cache
+C:\Users\tobia\source\repos\HangingMan\HangingMan\bin\Debug\HangingMan.exe.config
+C:\Users\tobia\source\repos\HangingMan\HangingMan\bin\Debug\HangingMan.exe
+C:\Users\tobia\source\repos\HangingMan\HangingMan\bin\Debug\HangingMan.pdb
+C:\Users\tobia\source\repos\HangingMan\HangingMan\obj\Debug\HangingMan.csprojAssemblyReference.cache
+C:\Users\tobia\source\repos\HangingMan\HangingMan\obj\Debug\HangingMan.csproj.CoreCompileInputs.cache
+C:\Users\tobia\source\repos\HangingMan\HangingMan\obj\Debug\HangingMan.exe
+C:\Users\tobia\source\repos\HangingMan\HangingMan\obj\Debug\HangingMan.pdb
