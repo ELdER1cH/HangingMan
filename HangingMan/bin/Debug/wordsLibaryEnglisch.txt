@@ -1,0 +1,9 @@
+﻿Door
+Plant
+Floor
+Roof
+Sky
+Book
+Word
+Test
+Error

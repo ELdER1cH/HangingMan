@@ -64,17 +64,36 @@ namespace HangingMan
         static void Alone()
         {
             Random wordSelect = new Random();
-            string[] wordsFromFile = File.ReadAllLines(@"wordsLibary.txt");
+            string[] wordsFromFile = File.ReadAllLines(@"wordlibaryGerman.txt");
             int counter = 0;
             bool wordComplete = false;
             char userCharakter = ' ';
             bool error = false;
             int counterGuessedTrueCharakters = 0;
             int counterGuessedFalseCharakters = 0;
-
+            string wordlist;
             //--------------------------------------------------------------------------------------------------------
             Console.WriteLine("You are playing against the Computer!");
             Console.WriteLine("-------------------------------------");
+            Console.WriteLine("Do you want to use the German or Englisch wordlist?");
+            if ((wordlist = Console.ReadLine()) == "German")
+            {
+                wordsFromFile = File.ReadAllLines(@"wordlibaryGerman.txt");
+            }
+            else
+            {
+                if (wordlist == "Englisch")
+                {
+                    wordsFromFile = File.ReadAllLines(@"wordsLibary.txt");
+                }
+                else
+                {
+                    Console.WriteLine("Unknown Language!");
+                    Thread.Sleep(1500);
+                    Console.Clear();
+                    Alone();
+                }
+            }
             Console.WriteLine();
             wort = wordsFromFile[wordSelect.Next(0,wordsFromFile.Length)];
             var guessedWord = new StringBuilder(new String('-', wort.Length));
@@ -253,6 +272,7 @@ namespace HangingMan
                     Console.Clear();
                     Together();
                 }
+                else Environment.Exit(0);
                 //--------------------------------------------------------------------------------------------------------
                 Console.ReadLine();
             }
