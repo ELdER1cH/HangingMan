@@ -136,6 +136,11 @@ namespace HangingMan
                     error = true;
                 }
                 //--------------------------------------------------------------------------------------------------------
+                if (userCharakter == '*')
+                {
+                    counter = Cheat(counter);
+                }
+                else { 
 
                 if (
                     guessedTrueCharakters.Contains(userCharakter) ||
@@ -164,77 +169,78 @@ namespace HangingMan
                 else
                 {
 
-                    if (wort.Contains(char.ToUpper(userCharakter)) || wort.Contains(char.ToLower(userCharakter)))
-                    {
-                        Console.WriteLine();
-                        Console.WriteLine("----------");
-                        Console.WriteLine("Well Done!");
-                        Console.WriteLine();
-                        int i = 0;
-                        if (wort.Contains(char.ToUpper(userCharakter)))
+                        if (wort.Contains(char.ToUpper(userCharakter)) || wort.Contains(char.ToLower(userCharakter)))
                         {
-                            for (i = 0; i < wort.Length; i++)
+                            Console.WriteLine();
+                            Console.WriteLine("----------");
+                            Console.WriteLine("Well Done!");
+                            Console.WriteLine();
+                            int i = 0;
+                            if (wort.Contains(char.ToUpper(userCharakter)))
                             {
-                                if (char.ToUpper(userCharakter) == wort[i])
-                                    guessedWord[i] = char.ToUpper(userCharakter);
+                                for (i = 0; i < wort.Length; i++)
+                                {
+                                    if (char.ToUpper(userCharakter) == wort[i])
+                                        guessedWord[i] = char.ToUpper(userCharakter);
+                                }
                             }
-                        }
-                        //----------------------------------------------------------
-                        if (wort.Contains(char.ToLower(userCharakter)))
-                        {
-                            for (i = 0; i < wort.Length; i++)
+                            //----------------------------------------------------------
+                            if (wort.Contains(char.ToLower(userCharakter)))
                             {
-                                if (userCharakter == wort[i])
-                                    guessedWord[i] = userCharakter;
+                                for (i = 0; i < wort.Length; i++)
+                                {
+                                    if (userCharakter == wort[i])
+                                        guessedWord[i] = userCharakter;
+                                }
                             }
-                        }
-                        //----------------------------------------------------------
-                        Console.Write("Your guessed Word is: ");
-                        Console.WriteLine(guessedWord);
-                        //----------------------------------------------------------
-                        guessedTrueCharakters[counterGuessedTrueCharakters] = char.ToLower(userCharakter);
-                        Console.Write("Already guessed true Charakters: ");
-                        Console.WriteLine(guessedTrueCharakters);
-                        counterGuessedTrueCharakters++;
-                        //----------------------------------------------------------
-                        if (guessedWord.ToString() == wort)
-                        {
-                            wordComplete = true;
-                        }
-
-                        Console.ReadLine();
-                        Console.Clear();
-
-                    }
-                    else
-                    {
-                        if (error == true)
-                        {
-                            Console.WriteLine("You made a mistake!");
-                            error = false;
-                            Thread.Sleep(1000);
-                        }
-                        //----------------------------------------------------------
-                        else
-                        {
-                            Console.WriteLine("What a pity!");
-                            Console.WriteLine("Your Charakter is not in the Word!");
-                            counter++;
-                            guessedFalseCharakters[counterGuessedFalseCharakters] = char.ToLower(userCharakter);
-                            counterGuessedFalseCharakters++;
-
+                            //----------------------------------------------------------
+                            Console.Write("Your guessed Word is: ");
+                            Console.WriteLine(guessedWord);
+                            //----------------------------------------------------------
+                            guessedTrueCharakters[counterGuessedTrueCharakters] = char.ToLower(userCharakter);
+                            Console.Write("Already guessed true Charakters: ");
+                            Console.WriteLine(guessedTrueCharakters);
+                            counterGuessedTrueCharakters++;
+                            //----------------------------------------------------------
                             if (guessedWord.ToString() == wort)
                             {
                                 wordComplete = true;
                             }
 
                             Console.ReadLine();
+                            Console.Clear();
+
+                        }
+                        else
+                        {
+                            if (error == true)
+                            {
+                                Console.WriteLine("You made a mistake!");
+                                error = false;
+                                Console.ReadLine();
+                            }
+                            //----------------------------------------------------------
+                            else
+                            {
+                                Console.WriteLine("What a pity!");
+                                Console.WriteLine("Your Charakter is not in the Word!");
+                                counter++;
+                                guessedFalseCharakters[counterGuessedFalseCharakters] = char.ToLower(userCharakter);
+                                counterGuessedFalseCharakters++;
+
+                                if (guessedWord.ToString() == wort)
+                                {
+                                    wordComplete = true;
+                                }
+
+                                Console.ReadLine();
+                            }
                         }
                         Console.Clear();
                     }
-
+                    Console.Clear();
                 }
-
+                Console.Clear();
             }
             //--------------------------------------------------------------------------------------------------------
 
@@ -255,6 +261,8 @@ namespace HangingMan
                     Console.Clear();
                     Together();
                 }
+                else
+                    Environment.Exit(1);
             }
             else
             {
@@ -279,25 +287,25 @@ namespace HangingMan
         }
         static void Together()
         {
-                int counter = 0;
-                bool wordComplete = false;
-                char userCharakter = ' ';
-                bool error = false;
-                int counterGuessedTrueCharakters = 0;
-                int counterGuessedFalseCharakters = 0;
+            int counter = 0;
+            bool wordComplete = false;
+            char userCharakter = ' ';
+            bool error = false;
+            int counterGuessedTrueCharakters = 0;
+            int counterGuessedFalseCharakters = 0;
 
             //--------------------------------------------------------------------------------------------------------
             Console.WriteLine("You are playing together!");
-                Console.WriteLine("-------------------------");
-                Console.WriteLine();
-                Console.WriteLine("Player 1 please enter you word: ");
-                wort = Console.ReadLine();
-                var guessedWord = new StringBuilder(new String('-', wort.Length));
-                char[] guessedTrueCharakters = new char[100];
-                char[] guessedFalseCharakters = new char[100];
-                Console.WriteLine("The word is saved!");
-                Thread.Sleep(3000);
-                Console.Clear();
+            Console.WriteLine("-------------------------");
+            Console.WriteLine();
+            Console.WriteLine("Player 1 please enter you word: ");
+            wort = Console.ReadLine();
+            var guessedWord = new StringBuilder(new String('-', wort.Length));
+            char[] guessedTrueCharakters = new char[100];
+            char[] guessedFalseCharakters = new char[100];
+            Console.WriteLine("The word is saved!");
+            Thread.Sleep(3000);
+            Console.Clear();
             //--------------------------------------------------------------------------------------------------------
 
             while (counter < 10 && wordComplete == false)
@@ -331,77 +339,82 @@ namespace HangingMan
                     error = true;
                 }
                 //--------------------------------------------------------------------------------------------------------
-
-                if (
-                    guessedTrueCharakters.Contains(userCharakter) || 
-                    guessedTrueCharakters.Contains(char.ToUpper(userCharakter)) || 
-                    guessedTrueCharakters.Contains(char.ToLower(userCharakter)) || 
-                    guessedFalseCharakters.Contains(userCharakter) || 
-                    guessedFalseCharakters.Contains(char.ToUpper(userCharakter)) || 
-                    guessedFalseCharakters.Contains(char.ToLower(userCharakter))
-                   )
+                if (userCharakter == '*')
                 {
-                    Console.WriteLine("Already guessed charakter!!");
-                    Console.WriteLine();
-                    //----------------------------------------------------------
-                    Console.WriteLine("Your guessed Word is: ");
-                    Console.WriteLine(guessedWord);
-                    //----------------------------------------------------------
-                    Console.Write("Already guessed true Charakters:");
-                    Console.WriteLine(guessedTrueCharakters);
-                    //----------------------------------------------------------
-                    Console.Write("Already guessed false Charakters:");
-                    Console.WriteLine(guessedFalseCharakters);
-                    //----------------------------------------------------------
-                    Thread.Sleep(2000);
-                    Console.Clear();
+                    counter = Cheat(counter);
                 }
                 else
-                { 
-
-                    if (wort.Contains(char.ToUpper(userCharakter)) || wort.Contains(char.ToLower(userCharakter)))
+                {
+                    if (
+                    guessedTrueCharakters.Contains(userCharakter) ||
+                    guessedTrueCharakters.Contains(char.ToUpper(userCharakter)) ||
+                    guessedTrueCharakters.Contains(char.ToLower(userCharakter)) ||
+                    guessedFalseCharakters.Contains(userCharakter) ||
+                    guessedFalseCharakters.Contains(char.ToUpper(userCharakter)) ||
+                    guessedFalseCharakters.Contains(char.ToLower(userCharakter))
+                   )
                     {
+                        Console.WriteLine("Already guessed charakter!!");
                         Console.WriteLine();
-                        Console.WriteLine("----------");
-                        Console.WriteLine("Well Done!");
-                        Console.WriteLine();
-                        int i = 0;
-                        if (wort.Contains(char.ToUpper(userCharakter)))
-                        {
-                            for (i = 0; i < wort.Length; i++)
-                            {
-                                if (char.ToUpper(userCharakter) == wort[i])
-                                    guessedWord[i] = char.ToUpper(userCharakter);
-                            }
-                        }
                         //----------------------------------------------------------
-                        if (wort.Contains(char.ToLower(userCharakter)))
-                        {
-                            for (i = 0; i < wort.Length; i++)
-                            {
-                                if (userCharakter == wort[i])
-                                    guessedWord[i] = userCharakter;
-                            }
-                        }
-                        //----------------------------------------------------------
-                        Console.Write("Your guessed Word is: ");
+                        Console.WriteLine("Your guessed Word is: ");
                         Console.WriteLine(guessedWord);
                         //----------------------------------------------------------
-                        guessedTrueCharakters[counterGuessedTrueCharakters] = char.ToLower(userCharakter);
-                        Console.Write("Already guessed true Charakters: ");
+                        Console.Write("Already guessed true Charakters:");
                         Console.WriteLine(guessedTrueCharakters);
-                        counterGuessedTrueCharakters++;
                         //----------------------------------------------------------
-                        if (guessedWord.ToString() == wort)
-                        {
-                            wordComplete = true;
-                        }
-
-                        Console.ReadLine();
+                        Console.Write("Already guessed false Charakters:");
+                        Console.WriteLine(guessedFalseCharakters);
+                        //----------------------------------------------------------
+                        Thread.Sleep(2000);
                         Console.Clear();
-                        
                     }
                     else
+                    {
+
+                        if (wort.Contains(char.ToUpper(userCharakter)) || wort.Contains(char.ToLower(userCharakter)))
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("----------");
+                            Console.WriteLine("Well Done!");
+                            Console.WriteLine();
+                            int i = 0;
+                            if (wort.Contains(char.ToUpper(userCharakter)))
+                            {
+                                for (i = 0; i < wort.Length; i++)
+                                {
+                                    if (char.ToUpper(userCharakter) == wort[i])
+                                        guessedWord[i] = char.ToUpper(userCharakter);
+                                }
+                            }
+                            //----------------------------------------------------------
+                            if (wort.Contains(char.ToLower(userCharakter)))
+                            {
+                                for (i = 0; i < wort.Length; i++)
+                                {
+                                    if (userCharakter == wort[i])
+                                        guessedWord[i] = userCharakter;
+                                }
+                            }
+                            //----------------------------------------------------------
+                            Console.Write("Your guessed Word is: ");
+                            Console.WriteLine(guessedWord);
+                            //----------------------------------------------------------
+                            guessedTrueCharakters[counterGuessedTrueCharakters] = char.ToLower(userCharakter);
+                            Console.Write("Already guessed true Charakters: ");
+                            Console.WriteLine(guessedTrueCharakters);
+                            counterGuessedTrueCharakters++;
+                            //----------------------------------------------------------
+                            if (guessedWord.ToString() == wort)
+                            {
+                                wordComplete = true;
+                            }
+
+                            Console.ReadLine();
+                            Console.Clear();
+
+                        }
+                        else
                         {
                             if (error == true)
                             {
@@ -415,22 +428,22 @@ namespace HangingMan
                                 Console.WriteLine("What a pity!");
                                 Console.WriteLine("Your Charakter is not in the Word!");
                                 counter++;
-                                guessedFalseCharakters[counterGuessedFalseCharakters] = char.ToLower( userCharakter);
+                                guessedFalseCharakters[counterGuessedFalseCharakters] = char.ToLower(userCharakter);
                                 counterGuessedFalseCharakters++;
-                                
+
                                 if (guessedWord.ToString() == wort)
                                 {
                                     wordComplete = true;
                                 }
 
-                            Console.ReadLine();
+                                Console.ReadLine();
                             }
                             Console.Clear();
                         }
-
+                        Console.Clear();
                     }
-                
-            }
+                }Console.Clear();
+                }
                 //--------------------------------------------------------------------------------------------------------
 
                 if (wort == guessedWord.ToString())
@@ -443,13 +456,13 @@ namespace HangingMan
                     Console.WriteLine("The word is: " + wort);
                     Console.Write("Do you want to play again(y/n):");
                     string repeat = Console.ReadLine();
-                if (repeat == "y")
-                {
-                    Thread.Sleep(2000);
-                    Console.Clear();
-                    Together();
-                }
-                else Environment.Exit(0);
+                    if (repeat == "y")
+                    {
+                        Thread.Sleep(2000);
+                        Console.Clear();
+                        Together();
+                    }
+                    else Environment.Exit(0);
                 }
                 else
                 {
@@ -461,18 +474,48 @@ namespace HangingMan
                     Console.WriteLine("The word would have been: " + wort);
                     Console.Write("Do you want to play again(y/n):");
                     string repeat = Console.ReadLine();
-                if (repeat == "y")
-                {
-                    Thread.Sleep(2000);
-                    Console.Clear();
-                    Together();
-                }
-                else Environment.Exit(0);
+                    if (repeat == "y")
+                    {
+                        Thread.Sleep(2000);
+                        Console.Clear();
+                        Together();
+                    }
+                    else Environment.Exit(0);
                     //--------------------------------------------------------------------------------------------------------
                     Console.ReadLine();
-                Endwhile:;
+
                 }
-            } 
+            
+        }
+        static int Cheat(int counter)
+        {
+            int newCounter = counter;
+            Console.WriteLine("You opened the Cheat Console!");
+            Console.WriteLine("-----------------------------");
+            Console.WriteLine("You can do these things:");
+            Console.WriteLine("- Change counter?");
+            Console.WriteLine("- Show Word");
+            string cheatOptions = Console.ReadLine();
+            switch (cheatOptions)
+            {
+                case ("Change Counter"):
+                    Console.Write("Please type in your new Counter: ");
+                    newCounter = Convert.ToInt32(Console.ReadLine());
+                    break;
+                case ("Show Word"):
+                    Console.WriteLine("The word is:" + wort);
+                    Console.ReadLine();
+                    break;
+                default:
+                    Console.WriteLine("Unknown!");
+                    Thread.Sleep(1000);
+                    Console.Clear();
+                    Cheat(counter);
+                    break;
+            }
+           
+            return newCounter;
+        }
         static void HangingManPicture (int counter)
         {
                 switch (counter)
