@@ -75,33 +75,118 @@ namespace HangingMan
             //--------------------------------------------------------------------------------------------------------
             Console.WriteLine("You are playing against the Computer!");
             Console.WriteLine("-------------------------------------");
-            Console.WriteLine("Do you want to use the German or Englisch wordlist?");
-            if ((wordlist = Console.ReadLine()) == "German")
+            Console.WriteLine("Which wordlist do you want to use?");
+            Console.WriteLine("(Default: German)");
+            Console.WriteLine("- German");
+            Console.WriteLine("- English");
+            Console.WriteLine("- your own");
+            wordlist = Console.ReadLine();
+            switch (wordlist)
             {
-                wordsFromFile = File.ReadAllLines(@"wordlibaryGerman.txt");
-            }
-            else
-            {
-                if (wordlist == "Englisch")
-                {
+                case ("German"):
+                    wordsFromFile = File.ReadAllLines(@"wordlibaryGerman.txt");
+                    break;
+                case ("English"):
                     wordsFromFile = File.ReadAllLines(@"wordsLibary.txt");
-                }
-                else
-                {
-                    Console.WriteLine("Unknown Language!");
+                    break;
+                //----------------------------------------------------------------------
+                case ("my own"):
+                    string repeat = "y";
+                    Console.Clear();
+                    do
+                    {
+
+                        Console.WriteLine("You habe choosen your own List");
+                        Console.WriteLine("------------------------------");
+                        Console.WriteLine("You have the Options:");
+                        Console.WriteLine("- Clear list");
+                        Console.WriteLine("- Import another list");
+                        Console.WriteLine("- add words");
+                        Console.WriteLine("------------------------------");
+                        Console.WriteLine("To move on just type in skip");
+                        string ownListOptions;
+                        //----------------------------------------------------------------------
+                        switch (ownListOptions = Console.ReadLine())
+                        {
+                            //----------------------------------------------------------------------
+                            case ("Import another list"):
+                                Console.WriteLine("Do you want to import another list? (y/n)");
+                                Console.WriteLine("! Be warned your words will be overritten !");
+                                string importList;
+                                if ((importList = Console.ReadLine()) == "y")
+                                {
+                                    Console.Write("Which one (German or English): ");
+                                    string importListChoose;
+                                    switch (importListChoose = Console.ReadLine())
+                                    {
+                                        case ("German"):
+                                            File.Copy("wordlibaryGerman.txt", "myownLibary.txt", true);
+                                            break;
+                                        case ("English"):
+                                            File.Copy("wordsLibaryEnglisch.txt", "myownLibary.txt", true);
+                                            break;
+                                        default:
+                                            Console.WriteLine("Unkown List!");
+                                            Thread.Sleep(1500);
+                                            Console.Clear();
+                                            Alone();
+                                            break;
+                                    }
+                                }
+                                break;
+                            //----------------------------------------------------------------------
+                            case ("Clear List"):
+                                File.Delete("myownLibary.txt");
+                                File.Create("myownLibary.txt");
+                                break;
+                            //----------------------------------------------------------------------
+                            case ("skip"):
+                                repeat = " ";
+                                break;
+                            //----------------------------------------------------------------------
+                            case ("add words"):
+                                string repeat1 = "y";
+                                while (repeat1 == "y")
+                                {
+                                    Console.Write("Please type in your word: ");
+                                    var writeLine = from line in File.ReadLines("myownLibary.txt")
+                                                       where File.ReadLines("myownLibary.txt") == null
+                                                       select line;
+                                    File.AppendAllLines("myownLibary.txt", writeLine);
+                                    Console.WriteLine("Do you want to add another word ? (y/n)");
+                                    repeat1 = Console.ReadLine();
+
+                                }
+                                
+                                break;
+                            //----------------------------------------------------------------------
+                            default:
+                                Console.WriteLine("Unknown!");
+                                Thread.Sleep(1000);
+                                break;
+                        }
+                        Console.Clear();
+                        //----------------------------------------------------------------------
+                    } while (repeat == "y");
+                    break;
+                default:
+                    Console.WriteLine("Unkown List!");
                     Thread.Sleep(1500);
                     Console.Clear();
                     Alone();
-                }
+                    break;
             }
             Console.WriteLine();
+            //----------------------------------------------------------------
             wort = wordsFromFile[wordSelect.Next(0,wordsFromFile.Length)];
             var guessedWord = new StringBuilder(new String('-', wort.Length));
+            //----------------------------------------------------------------
             char[] guessedTrueCharakters = new char[100];
             char[] guessedFalseCharakters = new char[100];
+            //----------------------------------------------------------------
             Thread.Sleep(1000);
-            Console.WriteLine("The word is set!");
-            Thread.Sleep(3000);
+            Console.WriteLine("The word is set! (Press Enter)");
+            Console.ReadLine();
             Console.Clear();
             //--------------------------------------------------------------------------------------------------------
 
